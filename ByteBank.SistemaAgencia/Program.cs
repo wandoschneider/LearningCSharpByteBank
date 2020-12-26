@@ -1,6 +1,9 @@
 ﻿using System;
+using Humanizer;
 using ByteBank.Modelos;
 using ByteBank.Modelos.Funcionarios;
+using System.Threading;
+using System.Globalization;
 
 namespace ByteBank.SistemaAgencia
 {
@@ -8,11 +11,15 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            CultureInfo culture = new CultureInfo("pt-BR");
 
-            ContaCorrente conta = new ContaCorrente(123, 123456);
-            Console.WriteLine(conta.Numero);
-        
+            DateTime dataFimPagamento = new DateTime(2020, 12, 31);
+            DateTime dataCorrente = DateTime.Now;
+
+            TimeSpan diferenca = dataFimPagamento - dataCorrente;
+            string mensagem = "Vencimento em: " + Humanizer.TimeSpanHumanizeExtensions.Humanize(diferenca, 1, culture);
+
+            Console.WriteLine(mensagem);
         }
     }
 }
