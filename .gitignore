@@ -351,3 +351,4 @@ MigrationBackup/
 
 # Manually added:
 .DS_Store
+.vscode

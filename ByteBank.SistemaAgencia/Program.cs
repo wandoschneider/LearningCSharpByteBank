@@ -11,6 +11,19 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
+            string url = "paginas?argumentos";
+
+            Console.WriteLine(url);
+
+            int indiceInterrogacao = url.IndexOf('?');
+
+            string argumentos = url.Substring(indiceInterrogacao);
+
+            Console.WriteLine(argumentos);
+        }
+
+        public static void UsandoHumanizer()
+        {
             CultureInfo culture = new CultureInfo("pt-BR");
 
             DateTime dataFimPagamento = new DateTime(2020, 12, 31);
