@@ -2,8 +2,8 @@
 using Humanizer;
 using ByteBank.Modelos;
 using ByteBank.Modelos.Funcionarios;
-using System.Threading;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace ByteBank.SistemaAgencia
 {
@@ -11,18 +11,37 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            string url = "paginas?argumentos";
-
-            Console.WriteLine(url);
-
-            int indiceInterrogacao = url.IndexOf('?');
-
-            string argumentos = url.Substring(indiceInterrogacao);
-
-            Console.WriteLine(argumentos);
+            ContaCorrente conta = new ContaCorrente(123, 123456);
+            Console.WriteLine(conta);
+            //UsandoHumanizer();
+            //ExtratorURL();
+            // REGEX();
         }
 
-        public static void UsandoHumanizer()
+
+        static void REGEX()
+        {
+            string textoDeTeste = "Meu nome é Wando, me ligue em 4784-4546";
+            string padrao = "[0-9]{4,5}-?[0-9]{4}";
+
+            Match resultado = Regex.Match(textoDeTeste, padrao);
+
+            Console.WriteLine(resultado.Value);
+        }
+        static void ExtratorURL()
+        {
+            string urlParametros = "https://www.bytebank.com/cambio?moedaOrigem=Real&moedaDestino=Dolar&valor=1500";
+            ExtratorValorDeArgumentosURL extratorDeValores = new ExtratorValorDeArgumentosURL(urlParametros);
+
+            string valor = extratorDeValores.GetValor("moedaDestino");
+            Console.WriteLine("Valor de moeda Destino: " + valor);
+
+            string valorOrigem = extratorDeValores.GetValor("moedaOrigem");
+            Console.WriteLine("Valor de moeda Origem: " + valorOrigem);
+
+            Console.WriteLine(extratorDeValores.GetValor("VALOR"));
+        }
+        static void UsandoHumanizer()
         {
             CultureInfo culture = new CultureInfo("pt-BR");
 
